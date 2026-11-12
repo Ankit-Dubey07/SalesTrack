@@ -333,7 +333,7 @@ SVC_DETAIL = {
         paras=["Our trained sales professionals engage with potential customers, understand their needs, explain relevant products and services, and guide them through the customer journey.",
                "From initial customer interaction to sales conversion, we focus on delivering a professional customer experience while helping our clients increase engagement, improve conversion rates and grow their customer base."],
         list_title="The customer journey we manage",
-        flow=["Engage potential customers", "Understand their needs", "Explain products & services", "Guide to conversion"]),
+        flow=["Engage potential customers", "Understand their needs", "Present the Right Solutions", "Drive Successful Conversions"]),
     "live-transfer": dict(
         lead="We specialise in live transfer solutions that connect businesses with interested and qualified potential customers in real time.",
         paras=["Our process involves engaging prospects, understanding their requirements and assessing their suitability before transferring the call to the relevant business or sales representative.",
