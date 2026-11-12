@@ -70,6 +70,26 @@ WHY = [
     ("handshake", "Long-term business partnerships."),
 ]
 
+
+# ---------------------------------------------------------------- photos (client-supplied; see LICENCES.md)
+PHOTOS = {
+    "team-meeting": dict(widths=[668], w=668, h=381,
+        alt="A business team discussing plans around a glass table in a bright office"),
+    "sales-team": dict(widths=[600, 900], w=900, h=600,
+        alt="Smiling sales professionals wearing headsets, working at their desks"),
+    "lead-generation": dict(widths=[748], w=748, h=498,
+        alt="Illustration of the lead generation process: attracting prospects, filtering them through a funnel and turning them into business growth"),
+}
+def photo(name, sizes="(max-width: 860px) 100vw, 50vw", cls="media"):
+    d = PHOTOS[name]
+    ss = lambda ext: ", ".join(f"assets/img/photos/{name}-{w}.{ext} {w}w" for w in d["widths"])
+    big = max(d["widths"])
+    return (f'<figure class="{cls}"><picture>'
+            f'<source type="image/webp" srcset="{ss("webp")}" sizes="{sizes}">'
+            f'<img src="assets/img/photos/{name}-{big}.jpg" srcset="{ss("jpg")}" sizes="{sizes}" '
+            f'width="{d["w"]}" height="{d["h"]}" alt="{d["alt"]}" loading="lazy" decoding="async">'
+            f'</picture></figure>')
+
 # ---------------------------------------------------------------- shared components
 PREVIEW_META = '<meta name="claude:viewport-fit-sides" content="cover">\n'
 FONTS = ('<link rel="preload" href="assets/fonts/league-spartan-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>\n'
@@ -223,6 +243,7 @@ def home():
     <div class="reveal">
       <span class="eyebrow">Who we are</span>
       <h2 id="intro-title">Every successful business begins with the right connection.</h2>
+      {photo("team-meeting", "(max-width: 860px) 100vw, 520px", "media intro-media")}
     </div>
     <div class="prose reveal" data-delay="1">
       <p>We specialise in delivering <strong>high-quality lead generation, customer acquisition, sales support and business process solutions</strong> tailored to the unique needs of our clients.</p>
@@ -234,10 +255,13 @@ def home():
 
 <section class="section bg-surface" aria-labelledby="svc-title">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Our core services</span>
-      <h2 id="svc-title">Four ways we move your business forward.</h2>
-      <p class="lede">From the first conversation to the final handover, each service is tailored to your business requirements.</p>
+    <div class="head-split">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our core services</span>
+        <h2 id="svc-title">Four ways we move your business forward.</h2>
+        <p class="lede">From the first conversation to the final handover, each service is tailored to your business requirements.</p>
+      </div>
+      <div class="reveal" data-delay="1">{photo("lead-generation", "(max-width: 860px) 100vw, 560px", "media media-illustration")}</div>
     </div>
     <div class="service-grid">{cards}</div>
   </div>
@@ -245,10 +269,13 @@ def home():
 
 <section class="section on-ink" aria-labelledby="approach-title">
   <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow">Our approach</span>
-      <h2 id="approach-title">Targeted outreach. Real engagement. Qualified results.</h2>
-      <p class="lede">Our approach combines targeted outreach, customer engagement and structured lead qualification to help you build a consistent sales pipeline.</p>
+    <div class="head-split">
+      <div class="section-head reveal">
+        <span class="eyebrow">Our approach</span>
+        <h2 id="approach-title">Targeted outreach. Real engagement. Qualified results.</h2>
+        <p class="lede">Our approach combines targeted outreach, customer engagement and structured lead qualification to help you build a consistent sales pipeline.</p>
+      </div>
+      <div class="reveal" data-delay="1">{photo("sales-team", "(max-width: 860px) 100vw, 560px", "media media-dark")}</div>
     </div>
     <ol class="approach">
       <li class="reveal"><h3>Reach the right audience</h3><p>We identify and attract potential customers through strategic, targeted outreach.</p></li>
@@ -337,6 +364,7 @@ def services():
     </div>
     <div class="svc-body reveal" data-delay="1">
       <p style="color:var(--text);font-size:var(--step-2);line-height:1.45;font-weight:600">{d["lead"]}</p>
+      {photo("sales-team", "(max-width: 960px) 100vw, 640px") if s["id"] == "b2c-sales" else ""}
       {paras}
       <h3>{d["list_title"]}</h3>
       {extra}

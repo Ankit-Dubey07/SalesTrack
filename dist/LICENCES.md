@@ -1,6 +1,6 @@
 # SalesTrack website: third-party licences and originality record
 
-Last reviewed: 12 November 2026
+Last reviewed: 12 November 2026 (images added)
 
 ## 1. What was written for this project
 
@@ -33,7 +33,19 @@ callboxinc.co.uk was used only as a reference for general layout ideas that most
 - **Fonts:** the font files are hosted with the site, in `assets/fonts/`. The OFL allows them to be embedded and used commercially, but the fonts must not be sold on their own. The licence files must stay with the font files.
 - **Icons:** the icons are drawn as simple lines. Because a few are adapted from Feather and Lucide, those licence notices are kept as a precaution, whether or not every icon would need one.
 
-No stock photos, AI-generated images, paid templates, or unlicensed fonts or images are used.
+### Client-supplied images
+
+These images were supplied by the client for use on the site. The developer has no record of where they came from or what licence applies to them. They were only cropped (to remove borders and on-image text), resized and compressed, and saved as WebP and JPEG in `assets/img/photos/`.
+
+| File | Used on | What the client must confirm before launch |
+|---|---|---|
+| `team-meeting-*` (business team at a glass table) | Home: "Who we are" | Where it came from (AI tool, stock site or your own photo) and that commercial use is allowed. It looks AI-generated; if so, check that tool's commercial-use terms. |
+| `sales-team-*` (agents wearing headsets) | Home: "Our approach"; Services: B2C Sales | Cropped from a SalesTrack-branded banner. Confirm who made it and the source of the people shown. If they are real people, you need model releases or a stock licence. |
+| `lead-generation-*` (funnel illustration) | Home: "Our core services" | This style is common on free illustration sites, which often **require attribution** or a paid licence. Confirm the source and licence, and add any required credit. |
+
+**A supplied image was not used:** the call-centre image showing a call screen with "Jerry Martin +1 (568) 212-2017". It shows a named person and a phone number, and the interface looks like another company's product screenshot. Its copyright status is unclear and it could mislead visitors.
+
+Apart from the images above, no stock photos, paid templates, or unlicensed fonts or images are used.
 
 ## 3. Check before launch
 
