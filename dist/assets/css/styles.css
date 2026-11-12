@@ -538,3 +538,5 @@ address { font-style: normal; }
 .consent a { color: var(--signal); font-weight: 700; }
 .crumbs { align-items: center; }
 .crumbs a { margin-block: -8px; }
+/* Final step of a service flow: keep the navy highlight on every section background (white text was showing on white) */
+.svc .flow li:last-child, .svc:nth-of-type(odd) .flow li:last-child { background: var(--ink); color: #fff; border-color: var(--ink); }
