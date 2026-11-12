@@ -19,7 +19,7 @@
 <link rel="preload" href="assets/fonts/manrope-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/css/styles.css">
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "SalesTrack", "slogan": "Lead. Connect. Grow.", "url": "https://www.salestrack.co.in", "email": "info@salestrack.co.in", "logo": "https://www.salestrack.co.in/assets/img/salestrack-logo.png", "description": "Lead generation, B2C sales, live transfer and BPO services.", "contactPoint": {"@type": "ContactPoint", "email": "info@salestrack.co.in", "contactType": "sales", "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "14:30", "closes": "23:00"}}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Organization", "name": "SalesTrack", "slogan": "Lead. Connect. Grow.", "url": "https://www.salestrack.co.in", "email": "info@salestrack.co.in", "address": {"@type": "PostalAddress", "streetAddress": "Daffodil, 5th Floor, Opposite Sahas Cricket Club", "addressLocality": "Nagpur", "addressRegion": "Maharashtra", "addressCountry": "IN"}, "logo": "https://www.salestrack.co.in/assets/img/salestrack-logo.png", "description": "Lead generation, B2C sales, live transfer and BPO services.", "contactPoint": {"@type": "ContactPoint", "email": "info@salestrack.co.in", "contactType": "sales", "hoursAvailable": {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "14:30", "closes": "23:00"}}}</script>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
@@ -61,7 +61,7 @@
           <div class="field"><label for="company">Company <span class="opt">(optional)</span></label><input id="company" name="company" type="text" autocomplete="organization"></div>
           <div class="field full"><label for="service">Service you're interested in *</label><select id="service" name="service" required aria-describedby="service-err"><option value="">Choose a service</option><option value="lead-generation">Lead Generation</option><option value="b2c-sales">B2C Sales Solutions</option><option value="live-transfer">Live Transfer Solutions</option><option value="bpo">BPO Services</option><option value="not-sure">Not sure yet</option></select><span class="err" id="service-err" role="alert"></span></div>
           <div class="field full"><label for="message">How can we help? *</label><textarea id="message" name="message" required placeholder="Tell us about your business, your target customers and what you'd like to achieve." aria-describedby="message-err"></textarea><span class="err" id="message-err" role="alert"></span></div>
-          <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="consent-err"><span>I agree that SalesTrack may contact me about this enquiry.</span></label><span class="err" id="consent-err" role="alert"></span></div>
+          <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="consent-err"><span>I agree that SalesTrack may contact me about this enquiry, as described in our <a href="privacy.html">Privacy Notice</a>.</span></label><span class="err" id="consent-err" role="alert"></span></div>
         </div>
         <div class="form-actions"><button class="btn btn-ink" type="submit">Send enquiry <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button><small>Opens your email app with the details filled in.</small></div>
         <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
@@ -81,6 +81,10 @@
         <div class="email-row"><a href="mailto:info@salestrack.co.in">info@salestrack.co.in</a><button class="copy-btn" type="button" data-copy="info@salestrack.co.in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg><span>Copy</span></button></div>
         <p style="color:var(--muted)">For lead generation, sales support and outsourcing enquiries.</p>
       </div>
+      <div class="info-card reveal" data-delay="3">
+        <span class="label">Our office</span>
+        <address class="office-address">Daffodil, 5th Floor<br>Opposite Sahas Cricket Club<br>Nagpur, Maharashtra<br>India</address>
+      </div>
     </div>
   </div>
 </section>
@@ -94,14 +98,15 @@
         <p class="footer-tag">Lead. Connect. <span>Grow.</span></p>
       </div>
       <div><h2>Services</h2><ul><li><a href="services.html#lead-generation">Lead Generation</a></li><li><a href="services.html#b2c-sales">B2C Sales Solutions</a></li><li><a href="services.html#live-transfer">Live Transfer Solutions</a></li><li><a href="services.html#bpo">BPO Services</a></li></ul></div>
-      <div><h2>Company</h2><ul><li><a href="./">Home</a></li><li><a href="about.html">About us</a></li><li><a href="about.html#mission">Our mission</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h2>Company</h2><ul><li><a href="./">Home</a></li><li><a href="about.html">About us</a></li><li><a href="about.html#mission">Our mission</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy notice</a></li></ul></div>
       <div><h2>Get in touch</h2><ul>
         <li><a href="mailto:info@salestrack.co.in">info@salestrack.co.in</a></li>
         <li>Monday – Friday</li>
         <li>2:30 PM – 11:00 PM IST</li>
+        <li><address class="footer-address">Daffodil, 5th Floor<br>Opposite Sahas Cricket Club<br>Nagpur, Maharashtra<br>India</address></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span>Lead generation · Sales support · Outsourcing</span></div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span><a href="privacy.html">Privacy notice</a> · Lead generation · Sales support · Outsourcing</span></div>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="Back to top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></button>

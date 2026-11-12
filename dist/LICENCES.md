@@ -55,13 +55,6 @@ These items need checking by the business owner. This record is not legal advice
 2. **"SalesTrack" name and trademark.** Before launch, search the UK IPO trademark register (and the Indian TMR and EUIPO, if you trade there) for "SalesTrack" and similar names in classes 35 (business and marketing services) and 38 (telecommunications). Software and service companies may already use similar names. A trademark attorney can do a formal clearance search.
 3. **Domain.** The site assumes `www.salestrack.co.in`. Update `SITE_URL` in `build.py` if the domain is different.
 4. **Business claims.** Claims such as "International market expertise" and "Experienced and professionally trained teams" come from the client's own text. Under UK consumer and advertising rules (CAP Code), the business should be able to back them up.
-5. **Privacy notice (UK GDPR).** The contact form collects a name, email address, phone number and company name, and they reach SalesTrack by email. Before launch, add a privacy notice covering:
-   - who the controller is
-   - what data is collected, why, and the legal basis
-   - how long it is kept
-   - visitors' rights
-   - contact details
-
-   Also check whether the business must pay the ICO data protection fee. The notice needs the business's legal name and address, which the site doesn't have yet.
-6. **Company details.** If SalesTrack is a UK limited company, the Companies Act disclosure rules require the registered name, company number and registered office address on the website.
+5. **Privacy notice.** Added at `privacy.html` (12 November 2026). It covers the contact form, email, hosting and visitors' rights under India's DPDP Act 2023 and the UK/EU GDPR. It was written without a lawyer, so have a qualified adviser review it. Also confirm how long enquiry emails are kept, as the notice doesn't give a fixed period.
+6. **Company details.** The address shown is "Daffodil, 5th Floor, Opposite Sahas Cricket Club, Nagpur, Maharashtra, India". No company registration number is shown, at the client's request. Add it, and the PIN code, once available. Any rules on business details for the client's markets still apply.
 7. **Future additions.** Any testimonials, client logos, case studies, photos or statistics must be real, used with permission, and properly licensed.

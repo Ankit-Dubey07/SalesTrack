@@ -8,6 +8,8 @@ ROOT = pathlib.Path(__file__).parent
 SRC, DIST = ROOT / "src", ROOT / "dist"
 SITE_URL = "https://www.salestrack.co.in"  # update if the domain differs
 EMAIL = "info@salestrack.co.in"
+ADDRESS_LINES = ["Daffodil, 5th Floor", "Opposite Sahas Cricket Club", "Nagpur, Maharashtra", "India"]
+ADDRESS = ", ".join(ADDRESS_LINES)
 
 # ---------------------------------------------------------------- icons (24px line icons)
 P = {
@@ -101,6 +103,8 @@ def head(page, bare=False):
     ld = {
         "@context": "https://schema.org", "@type": "Organization", "name": "SalesTrack",
         "slogan": "Lead. Connect. Grow.", "url": SITE_URL, "email": EMAIL,
+        "address": {"@type": "PostalAddress", "streetAddress": "Daffodil, 5th Floor, Opposite Sahas Cricket Club",
+                    "addressLocality": "Nagpur", "addressRegion": "Maharashtra", "addressCountry": "IN"},
         "logo": SITE_URL + "/assets/img/salestrack-logo.png",
         "description": "Lead generation, B2C sales, live transfer and BPO services.",
         "contactPoint": {"@type": "ContactPoint", "email": EMAIL, "contactType": "sales",
@@ -158,14 +162,15 @@ def footer():
         <p class="footer-tag">Lead. Connect. <span>Grow.</span></p>
       </div>
       <div><h2>Services</h2><ul>{svc}</ul></div>
-      <div><h2>Company</h2><ul><li><a href="./">Home</a></li><li><a href="about.html">About us</a></li><li><a href="about.html#mission">Our mission</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h2>Company</h2><ul><li><a href="./">Home</a></li><li><a href="about.html">About us</a></li><li><a href="about.html#mission">Our mission</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy notice</a></li></ul></div>
       <div><h2>Get in touch</h2><ul>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li>
         <li>Monday – Friday</li>
         <li>2:30 PM – 11:00 PM IST</li>
+        <li><address class="footer-address">{"<br>".join(ADDRESS_LINES)}</address></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span>Lead generation · Sales support · Outsourcing</span></div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span><a href="privacy.html">Privacy notice</a> · Lead generation · Sales support · Outsourcing</span></div>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="Back to top">{icon("up")}</button>'''
@@ -447,7 +452,7 @@ def contact():
           <div class="field"><label for="company">Company <span class="opt">(optional)</span></label><input id="company" name="company" type="text" autocomplete="organization"></div>
           <div class="field full"><label for="service">Service you're interested in *</label><select id="service" name="service" required aria-describedby="service-err"><option value="">Choose a service</option>{opts}<option value="not-sure">Not sure yet</option></select><span class="err" id="service-err" role="alert"></span></div>
           <div class="field full"><label for="message">How can we help? *</label><textarea id="message" name="message" required placeholder="Tell us about your business, your target customers and what you'd like to achieve." aria-describedby="message-err"></textarea><span class="err" id="message-err" role="alert"></span></div>
-          <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="consent-err"><span>I agree that SalesTrack may contact me about this enquiry.</span></label><span class="err" id="consent-err" role="alert"></span></div>
+          <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="consent-err"><span>I agree that SalesTrack may contact me about this enquiry, as described in our <a href="privacy.html">Privacy Notice</a>.</span></label><span class="err" id="consent-err" role="alert"></span></div>
         </div>
         <div class="form-actions"><button class="btn btn-ink" type="submit">Send enquiry {ARROW}</button><small>Opens your email app with the details filled in.</small></div>
         <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
@@ -467,7 +472,77 @@ def contact():
         <div class="email-row"><a href="mailto:{EMAIL}">{EMAIL}</a><button class="copy-btn" type="button" data-copy="{EMAIL}">{icon("copy")}<span>Copy</span></button></div>
         <p style="color:var(--muted)">For lead generation, sales support and outsourcing enquiries.</p>
       </div>
+      <div class="info-card reveal" data-delay="3">
+        <span class="label">Our office</span>
+        <address class="office-address">{"<br>".join(ADDRESS_LINES)}</address>
+      </div>
     </div>
+  </div>
+</section>'''
+
+def privacy():
+    return page_hero("Privacy notice", "Your data", "Privacy Notice",
+                     "How SalesTrack collects, uses and protects personal information shared through this website.") + f'''
+<section class="section" aria-label="Privacy notice">
+  <div class="wrap">
+    <article class="legal">
+      <p class="legal-meta">Last updated: 12 November 2026</p>
+
+      <h2>1. Who we are</h2>
+      <p>This website (salestrack.co.in) is operated by <strong>SalesTrack</strong>, {ADDRESS}. In this notice, "we", "us" and "our" mean SalesTrack. We are responsible for the personal information described below.</p>
+      <p>For any privacy question or request, email <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+
+      <h2>2. What information we collect</h2>
+      <p><strong>When you send an enquiry.</strong> The contact form asks for your name, email address, service of interest and message, and optionally your phone number and company name. When you press "Send enquiry", the form opens your own email app with these details filled in. Nothing is stored on this website; we receive your information only when you send that email to us.</p>
+      <p><strong>When you email us directly.</strong> We receive your email address and anything you include in your message.</p>
+      <p><strong>When you browse the website.</strong> We do not use cookies, analytics, advertising trackers or social media plug-ins on this website, and we do not build visitor profiles. Our hosting provider records basic technical information, such as your IP address, for security and to deliver the website (see section 5).</p>
+
+      <h2>3. How we use your information</h2>
+      <ul>
+        <li>To reply to your enquiry and discuss the services you asked about.</li>
+        <li>To prepare proposals and, if you become a client, to provide our services.</li>
+        <li>To keep a record of our communication with you.</li>
+        <li>To meet legal obligations and protect our business against misuse.</li>
+      </ul>
+      <p>We use your information because you gave it to us and agreed to be contacted about your enquiry, or because it is needed to take steps you asked for before entering into a contract with us. We do not sell your personal information, and we do not use it for automated decision-making.</p>
+
+      <h2>4. Marketing</h2>
+      <p>We will only send you marketing messages if you have agreed to receive them. You can ask us to stop at any time by emailing <a href="mailto:{EMAIL}">{EMAIL}</a>.</p>
+
+      <h2>5. Who we share it with</h2>
+      <p>We share personal information only with service providers who help us run our business, and only as far as needed:</p>
+      <ul>
+        <li><strong>Email provider:</strong> GoDaddy hosts our business email, so enquiry emails are stored on its servers.</li>
+        <li><strong>Website hosting:</strong> GitHub (GitHub Pages) hosts this website and processes technical connection data, such as IP addresses, to deliver and secure it.</li>
+      </ul>
+      <p>These providers may store data outside India. We may also disclose information if the law requires it.</p>
+
+      <h2>6. How long we keep it</h2>
+      <p>We keep enquiry information only for as long as needed to respond to you and follow up on your enquiry, and for longer only if you become a client or the law requires it. After that, we delete it.</p>
+
+      <h2>7. How we protect it</h2>
+      <p>This website uses an encrypted connection (HTTPS). Access to our business email is limited to people who need it to handle enquiries. No method of sending or storing data online is completely secure, but we take reasonable steps to protect your information.</p>
+
+      <h2>8. Your rights</h2>
+      <p>You can ask us to:</p>
+      <ul>
+        <li>tell you what personal information we hold about you;</li>
+        <li>correct information that is wrong or incomplete;</li>
+        <li>delete your information;</li>
+        <li>withdraw your consent to being contacted.</li>
+      </ul>
+      <p>To make a request or raise a concern, email <a href="mailto:{EMAIL}">{EMAIL}</a> with the subject line "Privacy request". We will respond as soon as possible.</p>
+      <p>If you are in India, you may also have rights under the Digital Personal Data Protection Act, 2023. If you are in the United Kingdom or the European Union, you may have rights under the UK GDPR or EU GDPR, including the right to complain to your local data protection authority (in the UK, the Information Commissioner's Office).</p>
+
+      <h2>9. Children</h2>
+      <p>Our services are for businesses. This website is not intended for children, and we do not knowingly collect information from anyone under 18.</p>
+
+      <h2>10. Changes to this notice</h2>
+      <p>We may update this notice from time to time. The latest version will always be on this page, with the date it was last updated.</p>
+
+      <h2>11. Contact</h2>
+      <p><strong>SalesTrack</strong><br>{"<br>".join(ADDRESS_LINES)}<br>Email: <a href="mailto:{EMAIL}">{EMAIL}</a></p>
+    </article>
   </div>
 </section>'''
 
@@ -487,6 +562,8 @@ PAGES = [
          desc="SalesTrack helps businesses attract potential customers, build meaningful relationships and accelerate growth. Quality connections, smarter solutions, sustainable growth."),
     dict(file="contact.html", key="contact", title="Contact | SalesTrack", fn=contact,
          desc="Contact SalesTrack at info@salestrack.co.in. Business hours Monday to Friday, 2:30 PM to 11:00 PM IST."),
+    dict(file="privacy.html", key="", title="Privacy Notice | SalesTrack", fn=privacy,
+         desc="How SalesTrack collects, uses and protects personal information shared through salestrack.co.in."),
     dict(file="404.html", key="", title="Page Not Found | SalesTrack", fn=notfound, desc="The page you were looking for could not be found."),
 ]
 
@@ -521,7 +598,7 @@ if __name__ == "__main__":
     for p in PAGES:
         (DIST / p["file"]).write_text(render(p))
     (ROOT / "preview-index.html").write_text(render(PAGES[0], bare=True))
-    urls = "".join(f"<url><loc>{SITE_URL}/{'' if p['file']=='index.html' else p['file']}</loc></url>" for p in PAGES[:4])
+    urls = "".join(f"<url><loc>{SITE_URL}/{'' if p['file']=='index.html' else p['file']}</loc></url>" for p in PAGES if p['file'] != '404.html')
     (DIST / "sitemap.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>\n')
     shutil.copy(ROOT / "LICENCES.md", DIST / "LICENCES.md")
     (DIST / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE_URL}/sitemap.xml\n")
