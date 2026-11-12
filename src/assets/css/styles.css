@@ -504,3 +504,23 @@ h1, h2, h3, h4 { letter-spacing: -0.015em; }
 .svc-body .media { margin-block: 4px; }
 @media (max-width: 860px) { .head-split { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .media:hover img { transform: none; } }
+
+/* ---------- Responsive polish (QA pass) ---------- */
+/* Approach steps: each step carries its own rule so the marker dot always sits on a line, in any column count */
+.approach { border-top: 0; }
+.approach li { border-top: 1px solid var(--line-dark); }
+@media (max-width: 960px) { .approach li { padding-right: 20px; } }
+/* Never upscale the small team photo beyond its real pixel width */
+.intro-media { max-width: 668px; }
+/* Tablet: let the pipeline card use the full column instead of leaving a gap */
+@media (max-width: 960px) and (min-width: 601px) { .pipeline { max-width: none; } }
+/* Bigger tap areas for inline text links without changing their look */
+.text-link { padding-block: 10px; margin-block: -10px; }
+.crumbs a { padding-block: 8px; }
+/* Phones: the focus strip directly below repeats these three chips, so hide the duplicate; full-width buttons */
+@media (max-width: 600px) {
+  .tagline-chips { display: none; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions .btn { width: 100%; }
+  .cta-card .actions .btn { width: 100%; }
+}
