@@ -170,7 +170,7 @@ def footer():
         <li><address class="footer-address">{"<br>".join(ADDRESS_LINES)}</address></li>
       </ul></div>
     </div>
-    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span><a href="privacy.html">Privacy notice</a> · Lead generation · Sales support · Outsourcing</span></div>
+    <div class="footer-bottom"><span>© <span data-year>2026</span> SalesTrack. All rights reserved.</span><span>Lead generation · Sales support · Outsourcing</span></div>
   </div>
 </footer>
 <button class="to-top" type="button" aria-label="Back to top">{icon("up")}</button>'''
