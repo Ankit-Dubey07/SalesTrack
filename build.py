@@ -8,7 +8,7 @@ ROOT = pathlib.Path(__file__).parent
 SRC, DIST = ROOT / "src", ROOT / "dist"
 SITE_URL = "https://www.salestrack.co.in"  # update if the domain differs
 EMAIL = "info@salestrack.co.in"
-ADDRESS_LINES = ["Daffodil, 5th Floor", "Opposite Sahas Cricket Club", "Nagpur, Maharashtra", "India"]
+ADDRESS_LINES = ["Daffodil, 5th Floor", "Opposite Sahas Cricket Club", "Nagpur, Maharashtra 440015", "India"]
 ADDRESS = ", ".join(ADDRESS_LINES)
 
 # ---------------------------------------------------------------- icons (24px line icons)
@@ -104,7 +104,7 @@ def head(page, bare=False):
         "@context": "https://schema.org", "@type": "Organization", "name": "SalesTrack",
         "slogan": "Lead. Connect. Grow.", "url": SITE_URL, "email": EMAIL,
         "address": {"@type": "PostalAddress", "streetAddress": "Daffodil, 5th Floor, Opposite Sahas Cricket Club",
-                    "addressLocality": "Nagpur", "addressRegion": "Maharashtra", "addressCountry": "IN"},
+                    "addressLocality": "Nagpur", "addressRegion": "Maharashtra", "postalCode": "440015", "addressCountry": "IN"},
         "logo": SITE_URL + "/assets/img/salestrack-logo.png",
         "description": "Lead generation, B2C sales, live transfer and BPO services.",
         "contactPoint": {"@type": "ContactPoint", "email": EMAIL, "contactType": "sales",
