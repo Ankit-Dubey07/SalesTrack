@@ -1,0 +1,5 @@
+# Preview-only file for claude.ai (not part of the live site)
+preview-index.html
+__pycache__/
+.DS_Store
+Thumbs.db
