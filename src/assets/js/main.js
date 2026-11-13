@@ -161,7 +161,7 @@
       phone: function (v) { return !v.trim() || /^[+()\-\s\d]{7,20}$/.test(v.trim()) || "Use digits, spaces, + or - only (7–20 characters)."; },
       service: function (v) { return !!v || "Please choose the service you're interested in."; },
       message: function (v) { return v.trim().length >= 15 || "Tell us a little more (at least 15 characters)."; },
-      consent: function (v, el) { return el.checked || "Please confirm we can reply to your enquiry."; }
+      consent: function (v, el) { return el.checked || "Please tick this box so we can use your details to reply."; }
     };
     function check(name) {
       var el = form.elements[name]; if (!el) return true;
@@ -195,7 +195,12 @@
         "Company: " + (d("company") || "—"),
         "Service of interest: " + d("service"),
         "",
-        d("message")
+        d("message"),
+        "",
+        "---",
+        "Consent: I consent to SalesTrack using my details to respond to this enquiry, as described in the Privacy Notice (version 2, 13 November 2026).",
+        "Marketing updates: " + (form.elements.marketing && form.elements.marketing.checked ? "Yes, I opted in" : "No"),
+        "Consent given: " + new Date().toISOString()
       ].join("\n");
       var href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       var status = $("#form-status");

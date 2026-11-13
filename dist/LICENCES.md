@@ -1,6 +1,6 @@
 # SalesTrack website: third-party licences and originality record
 
-Last reviewed: 12 November 2026 (images added)
+Last reviewed: 13 November 2026 (full copyright and trademark audit)
 
 ## 1. What was written for this project
 
@@ -51,10 +51,10 @@ Apart from the images above, no stock photos, paid templates, or unlicensed font
 
 These items need checking by the business owner. This record is not legal advice and does not guarantee that the site is free of every possible copyright or trademark claim.
 
-1. **Logo ownership.** The logo files (`salestrack-logo.png`, `salestrack-logo-white.png`) were supplied by the client and only had their backgrounds removed and colours adjusted. Confirm who designed the logo and that SalesTrack owns it or has a written licence to use it. If a designer or a design or AI tool made it, check that tool's terms for commercial use.
-2. **"SalesTrack" name and trademark.** Before launch, search the UK IPO trademark register (and the Indian TMR and EUIPO, if you trade there) for "SalesTrack" and similar names in classes 35 (business and marketing services) and 38 (telecommunications). Software and service companies may already use similar names. A trademark attorney can do a formal clearance search.
+1. **Logo ownership.** The logo files (`salestrack-logo.png`, `salestrack-logo-white.png`) were supplied by the client and only had their backgrounds removed and colours adjusted. The dark version the client supplied carries Content Credentials (C2PA) naming the **OpenAI Media Service API**, with source type "trainedAlgorithmicMedia", so it was AI-generated with OpenAI's image tool. OpenAI's terms let users use outputs commercially. However, AI-generated designs may get little or no copyright protection, and a similar design may exist elsewhere. Protect the brand through a trade mark registration, and confirm who created the final version.
+2. **"SalesTrack" name and trademark.** An audit on 13 November 2026 found a **live US registration, SALESTRACK** (serial 75338697, class 35, market research for the food service industry, renewed 2017). It also found dead US filings and a sales-forecasting software product called SalesTrack.co. No UK or India register was searched directly. Before launch, search the UK IPO trademark register (and the Indian TMR and EUIPO, if you trade there) for "SalesTrack" and similar names in classes 35 (business and marketing services) and 38 (telecommunications). Software and service companies may already use similar names. A trademark attorney can do a formal clearance search.
 3. **Domain.** The site assumes `www.salestrack.co.in`. Update `SITE_URL` in `build.py` if the domain is different.
 4. **Business claims.** Claims such as "International market expertise" and "Experienced and professionally trained teams" come from the client's own text. Under UK consumer and advertising rules (CAP Code), the business should be able to back them up.
-5. **Privacy notice.** Added at `privacy.html` (12 November 2026). It covers the contact form, email, hosting and visitors' rights under India's DPDP Act 2023 and the UK/EU GDPR. It was written without a lawyer, so have a qualified adviser review it. Also confirm how long enquiry emails are kept, as the notice doesn't give a fixed period.
+5. **Privacy notice.** Updated to version 2 on 13 November 2026 for India's DPDP Act 2023 and DPDP Rules 2025. The contact form now shows a short data notice, a required consent box and a separate optional marketing box, and records consent in the enquiry email. See `PRIVACY-COMPLIANCE.md` for the full review, the business's own actions, and the items for legal review.
 6. **Company details.** The address shown is "Daffodil, 5th Floor, Opposite Sahas Cricket Club, Nagpur, Maharashtra 440015, India". No company registration number is shown, at the client's request. Add it once available. Any rules on business details for the client's markets still apply.
 7. **Future additions.** Any testimonials, client logos, case studies, photos or statistics must be real, used with permission, and properly licensed.

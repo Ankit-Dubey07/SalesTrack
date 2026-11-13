@@ -540,3 +540,14 @@ address { font-style: normal; }
 .crumbs a { margin-block: -8px; }
 /* Final step of a service flow: keep the navy highlight on every section background (white text was showing on white) */
 .svc .flow li:last-child, .svc:nth-of-type(odd) .flow li:last-child { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* ---------- Privacy: form notice and policy table ---------- */
+.data-notice { padding: 16px 18px; border-radius: 12px; background: var(--paper); border: 1px solid var(--line); color: var(--muted); font-size: .9rem; line-height: 1.6; }
+.data-notice strong { color: var(--text); }
+.data-notice a { color: var(--signal); font-weight: 600; word-break: break-word; }
+.form-grid .consent + .err { margin-top: 0; }
+.legal-table { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius-m); background: var(--surface); }
+.legal-table table { width: 100%; min-width: 640px; border-collapse: collapse; font-size: .92rem; line-height: 1.5; }
+.legal-table th, .legal-table td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.legal-table th { color: var(--text); font-weight: 700; background: var(--paper); }
+.legal-table tr:last-child td { border-bottom: 0; }
