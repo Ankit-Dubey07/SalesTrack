@@ -249,11 +249,48 @@
       ].join("\n");
       var href = "mailto:" + EMAIL + "?subject=" + encodeURIComponent(subject) + "&body=" + encodeURIComponent(body);
       var status = $("#form-status");
-      if (status) {
-        status.innerHTML = "<p>Your email app should open with your enquiry ready to send.</p><p>If it doesn't, email us directly at <strong>" + EMAIL + "</strong>.</p>";
+      var endpoint = form.getAttribute("data-endpoint");
+      function showStatus(html, kind) {
+        if (!status) return;
+        status.innerHTML = html;
+        status.classList.toggle("error", kind === "error");
         status.classList.add("show");
+        status.focus && status.focus();
       }
-      window.location.href = href;
+      if (!endpoint) {
+        showStatus("<p>Your email app should open with your enquiry ready to send.</p><p>If it doesn't, email us directly at <strong>" + EMAIL + "</strong>.</p>");
+        window.location.href = href;
+        return;
+      }
+      if (form.website && form.website.value) return; // spam trap
+      var btn = form.querySelector('button[type="submit"]');
+      var btnHtml = btn.innerHTML;
+      btn.disabled = true; btn.setAttribute("aria-busy", "true"); btn.textContent = "Sending…";
+      var payload = new URLSearchParams();
+      ["name", "email", "phone", "company", "service", "message"].forEach(function (n) { payload.append(n, d(n)); });
+      payload.append("consent", form.consent.checked ? "yes" : "no");
+      payload.append("marketing", form.marketing && form.marketing.checked ? "yes" : "no");
+      payload.append("page", window.location.pathname);
+      payload.append("website", form.website ? form.website.value : "");
+      fetch(endpoint, { method: "POST", body: payload })
+        .then(function (r) { return r.json(); })
+        .then(function (res) {
+          if (res && res.ok) {
+            var first = d("name").split(" ")[0];
+            form.reset();
+            Object.keys(rules).forEach(function (n) { var el = form.elements[n]; if (el) { el.removeAttribute("aria-invalid"); delete el.dataset.touched; var f = el.closest(".field"); if (f) f.classList.remove("invalid"); } });
+            showStatus("<p>Thank you, " + first.replace(/[^A-Za-z]/g, "") + ". Your enquiry has been sent" + (res.ref ? " (reference " + String(res.ref).replace(/[^A-Za-z0-9-]/g, "") + ")" : "") + ".</p><p>We've emailed you a confirmation. Our team will reply Monday to Friday, 2:30 PM to 11:00 PM IST.</p>");
+          } else {
+            var why = res && res.error === "too_soon" ? "You've just sent an enquiry. Please wait two minutes before sending another."
+              : res && res.error === "validation" ? "Some details weren't accepted. Please check the form and try again."
+              : "We couldn't send your enquiry just now.";
+            showStatus("<p>" + why + "</p><p>You can also email us directly at <strong>" + EMAIL + "</strong>.</p>", "error");
+          }
+        })
+        .catch(function () {
+          showStatus("<p>We couldn't send your enquiry. Please check your connection and try again.</p><p>You can also email us directly at <strong>" + EMAIL + "</strong>.</p>", "error");
+        })
+        .then(function () { btn.disabled = false; btn.removeAttribute("aria-busy"); btn.innerHTML = btnHtml; });
     });
   }
 

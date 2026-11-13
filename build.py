@@ -8,6 +8,8 @@ ROOT = pathlib.Path(__file__).parent
 SRC, DIST = ROOT / "src", ROOT / "dist"
 SITE_URL = "https://www.salestrack.co.in"  # update if the domain differs
 EMAIL = "info@salestrack.co.in"
+# Google Apps Script web app URL (apps-script/SETUP.md). Empty = form falls back to opening the visitor's email app.
+FORM_ENDPOINT = "https://script.google.com/macros/s/AKfycbwOsVqzexVTQK0IEjZN9ywtNqK57M6s2IA3q4YjdpKrFP-yOH37a-nXgj7f7NMzTFer/exec"
 ADDRESS_LINES = ["Daffodil, 5th Floor", "Opposite Sahas Cricket Club", "Nagpur, Maharashtra 440015", "India"]
 ADDRESS = ", ".join(ADDRESS_LINES)
 
@@ -444,7 +446,8 @@ def contact():
     <div class="form-card reveal">
       <h2>Send us an enquiry</h2>
       <p>All fields marked * are required. Please don't include website links.</p>
-      <form id="enquiry-form" novalidate>
+      <form id="enquiry-form" novalidate data-endpoint="{FORM_ENDPOINT}">
+        <div class="hp" aria-hidden="true"><label for="website">Leave this field empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
         <div class="form-grid">
           <div class="field"><label for="name">Full name *</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="60" aria-describedby="name-err"><span class="err" id="name-err" role="alert"></span></div>
           <div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="100" aria-describedby="email-err"><span class="err" id="email-err" role="alert"></span></div>
@@ -452,12 +455,12 @@ def contact():
           <div class="field"><label for="company">Company *</label><input id="company" name="company" type="text" autocomplete="organization" required maxlength="100" aria-describedby="company-err"><span class="err" id="company-err" role="alert"></span></div>
           <div class="field full"><label for="service">Service you're interested in *</label><select id="service" name="service" required aria-describedby="service-err"><option value="">Choose a service</option>{opts}<option value="not-sure">Not sure yet</option></select><span class="err" id="service-err" role="alert"></span></div>
           <div class="field full"><label for="message">How can we help? *</label><textarea id="message" name="message" required maxlength="2000" placeholder="Tell us about your business, your target customers and what you'd like to achieve." aria-describedby="message-err"></textarea><span class="err" id="message-err" role="alert"></span></div>
-          <div class="field full"><div class="data-notice" id="data-notice"><strong>How we use your details.</strong> We use the details in this form only to reply to your enquiry and discuss the service you ask about. They reach us by email; nothing is stored on this website. You can withdraw your consent or ask us to delete your details at any time by emailing <a href="mailto:{EMAIL}?subject=Privacy%20request">{EMAIL}</a>. Read the full <a href="privacy.html">Privacy Notice</a>.</div></div>
+          <div class="field full"><div class="data-notice" id="data-notice"><strong>How we use your details.</strong> We use the details in this form only to reply to your enquiry and discuss the service you ask about. {"They are saved in our enquiry records (Google Sheets) and sent to our team by email, and we email you a confirmation." if FORM_ENDPOINT else "They reach us by email; nothing is stored on this website."} You can withdraw your consent or ask us to delete your details at any time by emailing <a href="mailto:{EMAIL}?subject=Privacy%20request">{EMAIL}</a>. Read the full <a href="privacy.html">Privacy Notice</a>.</div></div>
           <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="data-notice consent-err"><span>I have read the notice above and consent to SalesTrack using my details to respond to this enquiry. *</span></label><span class="err" id="consent-err" role="alert"></span></div>
           <div class="field full"><label class="consent" for="marketing"><input id="marketing" name="marketing" type="checkbox"><span>Optional: I'd also like occasional updates about SalesTrack services. I can unsubscribe at any time.</span></label></div>
         </div>
-        <div class="form-actions"><button class="btn btn-ink" type="submit">Send enquiry {ARROW}</button><small>Opens your email app with the details filled in.</small></div>
-        <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+        <div class="form-actions"><button class="btn btn-ink" type="submit">Send enquiry {ARROW}</button><small>{"We reply Monday to Friday, 2:30 PM to 11:00 PM IST." if FORM_ENDPOINT else "Opens your email app with the details filled in."}</small></div>
+        <div class="form-status" id="form-status" role="status" aria-live="polite" tabindex="-1"></div>
       </form>
     </div>
 
@@ -488,7 +491,7 @@ def privacy():
 <section class="section" aria-label="Privacy notice">
   <div class="wrap">
     <article class="legal">
-      <p class="legal-meta">Version 2 · Last updated: 13 November 2026</p>
+      <p class="legal-meta">{"Version 3" if FORM_ENDPOINT else "Version 2"} · Last updated: 13 November 2026</p>
 
       <h2>1. Who we are</h2>
       <p>This website (salestrack.co.in) is operated by <strong>SalesTrack</strong>, {ADDRESS}. SalesTrack decides why and how your personal data is processed. Under India's Digital Personal Data Protection Act, 2023 (the "DPDP Act"), this makes us the <strong>Data Fiduciary</strong>.</p>
@@ -501,11 +504,11 @@ def privacy():
         <tbody>
           <tr><td>Enquiry form or email: name, email address, phone number, company name, service of interest and message</td><td>To reply to your enquiry, discuss the service you asked about and prepare a proposal</td><td>Your consent, given by ticking the consent box or by emailing us</td><td>Until your enquiry is resolved; longer only if you become a client or the law requires it</td></tr>
           <tr><td>Your choice about marketing updates</td><td>To send occasional updates about our services, only if you opted in</td><td>Your separate, optional consent</td><td>Until you unsubscribe or withdraw consent</td></tr>
-          <tr><td>A record of your consent (the consent text and the date and time, included in your enquiry email)</td><td>To show that you gave consent, as the DPDP Act requires</td><td>Legal obligation</td><td>For as long as we hold the enquiry it relates to</td></tr>
+          <tr><td>A record of your consent (the notice version and the date and time, {"saved with your enquiry record" if FORM_ENDPOINT else "included in your enquiry email"})</td><td>To show that you gave consent, as the DPDP Act requires</td><td>Legal obligation</td><td>For as long as we hold the enquiry it relates to</td></tr>
         </tbody>
       </table>
       </div>
-      <p>The enquiry form opens your own email app with your details filled in. Nothing is stored on this website; we receive your details only when you send that email. We do not sell personal data, and we do not use it for automated decision-making or profiling.</p>
+      <p>{"When you submit the enquiry form, your details are sent over an encrypted connection to our enquiry records, which are kept in Google Sheets. We then send you a confirmation email and notify our team by email. Nothing is stored on the website itself." if FORM_ENDPOINT else "The enquiry form opens your own email app with your details filled in. Nothing is stored on this website; we receive your details only when you send that email."} We do not sell personal data, and we do not use it for automated decision-making or profiling.</p>
 
       <h2>3. Cookies and tracking</h2>
       <p>This website does <strong>not</strong> use cookies, analytics, advertising trackers, social media plug-ins or browser storage, and it loads no content from other websites. Our hosting provider processes basic technical data, such as IP addresses, to deliver and secure the website (see section 5).</p>
@@ -517,6 +520,7 @@ def privacy():
       <p>We share personal data only with service providers that help us run our business, and only as far as needed:</p>
       <ul>
         <li><strong>Email hosting:</strong> GoDaddy hosts our business email, so enquiry emails are stored on its servers on our behalf.</li>
+{"        <li><strong>Enquiry records and emails:</strong> Google (Google Sheets and Google Apps Script) stores enquiry records and sends the confirmation and notification emails on our behalf.</li>" if FORM_ENDPOINT else ""}
         <li><strong>Website hosting:</strong> GitHub (GitHub Pages) hosts this website and processes technical connection data, such as IP addresses, to deliver and secure it, under its own privacy terms.</li>
       </ul>
       <p>These providers may store data outside India. We may also disclose personal data where the law requires it.</p>

@@ -553,3 +553,9 @@ address { font-style: normal; }
 .legal-table tr:last-child td { border-bottom: 0; }
 /* Keep side-by-side fields aligned when one shows an error message */
 .field { align-content: start; }
+
+/* ---------- Enquiry submission ---------- */
+.hp { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
+.form-status.error { background: #fff4f5; color: #8f1d2e; }
+.form-status:focus { outline: none; }
+button[aria-busy="true"] { opacity: .75; cursor: progress; }

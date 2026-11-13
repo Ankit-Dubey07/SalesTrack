@@ -13,6 +13,7 @@ This is a technical review, not legal advice. It does not certify compliance. Th
 | Point | Personal data | Where it goes | Stored on website? |
 |---|---|---|---|
 | Contact form (contact.html) | Name, email, phone, company, service of interest, message (all required); optional marketing choice; consent record | Opens the visitor's own email app; sent to info@salestrack.co.in (GoDaddy email) | No |
+| Contact form, once connected (apps-script/SETUP.md) | Same fields, plus a reference number | Google Sheet "Enquiries" tab (Google Apps Script); thank-you email to the customer; notification to info@ | No (stored in Google Sheets) |
 | Email links (all pages) | Whatever the visitor writes | info@salestrack.co.in (GoDaddy email) | No |
 | Website hosting | IP address and basic connection data | GitHub Pages server logs, under GitHub's terms | No (held by GitHub) |
 | Cookies, analytics, trackers, browser storage | None | n/a | n/a |
@@ -54,6 +55,7 @@ These can't be fixed in code. They depend on how SalesTrack works day to day.
 | Provider | Role | Data | Notes |
 |---|---|---|---|
 | GoDaddy | Business email hosting (processes for SalesTrack) | Enquiry emails | Check data processing terms and server locations |
+| Google (Sheets, Apps Script, email sending) | Enquiry records and confirmation emails, once the form is connected | All enquiry fields | Check Google's data processing terms; restrict Sheet sharing to staff who need it |
 | GitHub (Microsoft) | Website hosting | IP and connection logs | Processes under its own privacy terms; may be outside India |
 | Visitor's email provider | Sends the enquiry | The visitor's own email | Chosen by the visitor; outside SalesTrack's control |
 
@@ -68,7 +70,8 @@ These can't be fixed in code. They depend on how SalesTrack works day to day.
 7. Whether the consent-record approach (consent text and timestamp in the email) is sufficient evidence under s.6(10).
 8. How the DPDP Act applies to SalesTrack's core work: lead generation, calling and live transfers to third-party data principals. This is the largest compliance area, and it is outside the website.
 9. Data minimisation (s.6(1), s.8): phone and company became **required** on 13 November 2026 at the owner's request. Confirm that both are needed to handle an enquiry.
-10. The wording of the Privacy Notice as a whole, and its interaction with UK GDPR and EU GDPR for overseas clients.
+10. Storing enquiries in Google Sheets (Google as processor, possibly outside India) and sending automated emails: confirm the Privacy Notice v3 wording and the processor terms.
+11. The wording of the Privacy Notice as a whole, and its interaction with UK GDPR and EU GDPR for overseas clients.
 
 ## Sources
 
@@ -78,3 +81,4 @@ These can't be fixed in code. They depend on how SalesTrack works day to day.
 ## Change log
 
 - **13 Nov 2026:** All enquiry fields made required, except the optional marketing box, which must stay optional. Validation added: names letters and spaces only; strict email format; phone 10–15 digits with optional +; company letters, numbers and basic punctuation; website links blocked in every field. The Privacy Notice table was updated to match.
+- **13 Nov 2026:** Form can now save enquiries to Google Sheets and send confirmation and notification emails, using a Google Apps Script web app (`apps-script/`). It stays off until the web app URL is added to `FORM_ENDPOINT`. Once it's set, the form notice and Privacy Notice (v3) switch automatically to describe Google Sheets. Owner action: share the Sheet only with people who handle enquiries, and delete old rows according to the retention rule.

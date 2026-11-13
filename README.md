@@ -13,6 +13,7 @@ A fast, static website (HTML, CSS and JavaScript only, no frameworks) with four 
 | `src/assets/` | Stylesheets, JavaScript, fonts, logo images and licence texts |
 | `build.py` | Generates every page in `dist/` from shared header, footer and section components |
 | `LICENCES.md` | Third-party licences, originality record and pre-launch checklist |
+| `apps-script/` | Google Apps Script that saves enquiries to Google Sheets and sends emails; see `apps-script/SETUP.md` |
 | `PRIVACY-COMPLIANCE.md` | DPDP Act 2023 / Rules 2025 review: data map, fixes made, owner actions, items for legal review |
 
 ## Editing the site
