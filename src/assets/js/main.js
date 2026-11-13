@@ -155,12 +155,56 @@
     if (pre && form.service) {
       Array.prototype.forEach.call(form.service.options, function (o) { if (o.value === pre) form.service.value = pre; });
     }
+    /* Validation helpers */
+    var URL_RE = /(https?:\/\/|ftp:\/\/|www\.|\b[a-z0-9-]+(\.[a-z0-9-]+)*\.(com|net|org|in|co|io|ai|uk|us|info|biz|xyz|online|site|store|shop|app|dev|me|ly|tv|gg|link|click|top|club|live|pro|tech|cloud|digital|agency|blog|website|space|today)\b)/i;
+    var hasLink = function (v) { return URL_RE.test(v); };
+    var clean = function (v) { return v.replace(/\s+/g, " ").trim(); };
+    var NO_LINK = "Please remove website links. They aren't allowed in this form.";
     var rules = {
-      name: function (v) { return v.trim().length >= 2 || "Please enter your full name."; },
-      email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()) || "Please enter a valid email address, like name@company.com."; },
-      phone: function (v) { return !v.trim() || /^[+()\-\s\d]{7,20}$/.test(v.trim()) || "Use digits, spaces, + or - only (7–20 characters)."; },
+      name: function (v) {
+        v = clean(v);
+        if (!v) return "Please enter your full name.";
+        if (hasLink(v)) return NO_LINK;
+        if (!/^[A-Za-z]+(?: [A-Za-z]+)*$/.test(v)) return "Use English letters (A–Z) and spaces only. No numbers or symbols.";
+        if (v.replace(/ /g, "").length < 2) return "Please enter your full name.";
+        return true;
+      },
+      email: function (v) {
+        v = v.trim();
+        if (!v) return "Please enter your email address.";
+        if (/^https?:|^www\./i.test(v)) return NO_LINK;
+        if (/^[0-9+\s-]+$/.test(v)) return "That looks like a number. Please enter an email address, like name@company.com.";
+        if (v.length > 100 || !/^[A-Za-z0-9](?:[A-Za-z0-9._%+-]{0,62}[A-Za-z0-9_%+-])?@(?:[A-Za-z0-9](?:[A-Za-z0-9-]{0,61}[A-Za-z0-9])?\.)+[A-Za-z]{2,24}$/.test(v) || /\.\./.test(v))
+          return "Please enter a valid email address, like name@company.com.";
+        return true;
+      },
+      phone: function (v) {
+        v = v.trim();
+        if (!v) return "Please enter your phone number.";
+        if (hasLink(v)) return NO_LINK;
+        if (!/^\+?[0-9\s\-()]+$/.test(v) || (v.match(/\+/g) || []).length > 1) return "Use digits only, with an optional + at the start (spaces, - and brackets are fine).";
+        var digits = v.replace(/\D/g, "");
+        if (digits.length < 10 || digits.length > 15) return "Please enter a valid phone number with 10–15 digits, including the country or area code.";
+        if (/^(\d)\1+$/.test(digits)) return "Please enter a real phone number.";
+        return true;
+      },
+      company: function (v) {
+        v = clean(v);
+        if (!v) return "Please enter your company name.";
+        if (hasLink(v)) return NO_LINK;
+        if (!/^[A-Za-z0-9][A-Za-z0-9 &.,'()\/-]*$/.test(v) || !/[A-Za-z]/.test(v)) return "Use English letters, numbers, spaces and & . , ' - ( ) / only.";
+        if (v.length < 2) return "Please enter your company name.";
+        return true;
+      },
       service: function (v) { return !!v || "Please choose the service you're interested in."; },
-      message: function (v) { return v.trim().length >= 15 || "Tell us a little more (at least 15 characters)."; },
+      message: function (v) {
+        v = v.trim();
+        if (!v) return "Please tell us how we can help.";
+        if (hasLink(v)) return NO_LINK;
+        if (v.length < 15) return "Tell us a little more (at least 15 characters).";
+        if (v.length > 2000) return "Please keep your message under 2,000 characters.";
+        return true;
+      },
       consent: function (v, el) { return el.checked || "Please tick this box so we can use your details to reply."; }
     };
     function check(name) {
@@ -177,7 +221,8 @@
     }
     Object.keys(rules).forEach(function (n) {
       var el = form.elements[n]; if (!el) return;
-      el.addEventListener("blur", function () { if (el.value || el.type === "checkbox") check(n); });
+      el.addEventListener("blur", function () { if (el.value || el.type === "checkbox" || el.dataset.touched) check(n); });
+      el.addEventListener("input", function () { el.dataset.touched = "1"; });
       el.addEventListener("input", function () { if (el.getAttribute("aria-invalid") === "true") check(n); });
       el.addEventListener("change", function () { if (el.getAttribute("aria-invalid") === "true") check(n); });
     });
@@ -186,13 +231,13 @@
       var firstBad = null;
       Object.keys(rules).forEach(function (n) { if (!check(n) && !firstBad) firstBad = form.elements[n]; });
       if (firstBad) { firstBad.focus(); return; }
-      var d = function (n) { return (form.elements[n] && form.elements[n].value || "").trim(); };
+      var d = function (n) { var v = (form.elements[n] && form.elements[n].value || ""); return n === "message" ? v.trim() : v.replace(/\s+/g, " ").trim(); };
       var subject = "Enquiry: " + d("service") + " — " + d("name") + (d("company") ? " (" + d("company") + ")" : "");
       var body = [
         "Name: " + d("name"),
         "Email: " + d("email"),
-        "Phone: " + (d("phone") || "—"),
-        "Company: " + (d("company") || "—"),
+        "Phone: " + d("phone"),
+        "Company: " + d("company"),
         "Service of interest: " + d("service"),
         "",
         d("message"),

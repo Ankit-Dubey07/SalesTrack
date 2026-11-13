@@ -443,15 +443,15 @@ def contact():
   <div class="wrap contact-grid">
     <div class="form-card reveal">
       <h2>Send us an enquiry</h2>
-      <p>Fields marked with * are required.</p>
+      <p>All fields marked * are required. Please don't include website links.</p>
       <form id="enquiry-form" novalidate>
         <div class="form-grid">
-          <div class="field"><label for="name">Full name *</label><input id="name" name="name" type="text" autocomplete="name" required aria-describedby="name-err"><span class="err" id="name-err" role="alert"></span></div>
-          <div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" autocomplete="email" required aria-describedby="email-err"><span class="err" id="email-err" role="alert"></span></div>
-          <div class="field"><label for="phone">Phone <span class="opt">(optional)</span></label><input id="phone" name="phone" type="tel" autocomplete="tel" aria-describedby="phone-err"><span class="err" id="phone-err" role="alert"></span></div>
-          <div class="field"><label for="company">Company <span class="opt">(optional)</span></label><input id="company" name="company" type="text" autocomplete="organization"></div>
+          <div class="field"><label for="name">Full name *</label><input id="name" name="name" type="text" autocomplete="name" required maxlength="60" aria-describedby="name-err"><span class="err" id="name-err" role="alert"></span></div>
+          <div class="field"><label for="email">Work email *</label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required maxlength="100" aria-describedby="email-err"><span class="err" id="email-err" role="alert"></span></div>
+          <div class="field"><label for="phone">Phone *</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="+91 98765 43210" aria-describedby="phone-err"><span class="err" id="phone-err" role="alert"></span></div>
+          <div class="field"><label for="company">Company *</label><input id="company" name="company" type="text" autocomplete="organization" required maxlength="100" aria-describedby="company-err"><span class="err" id="company-err" role="alert"></span></div>
           <div class="field full"><label for="service">Service you're interested in *</label><select id="service" name="service" required aria-describedby="service-err"><option value="">Choose a service</option>{opts}<option value="not-sure">Not sure yet</option></select><span class="err" id="service-err" role="alert"></span></div>
-          <div class="field full"><label for="message">How can we help? *</label><textarea id="message" name="message" required placeholder="Tell us about your business, your target customers and what you'd like to achieve." aria-describedby="message-err"></textarea><span class="err" id="message-err" role="alert"></span></div>
+          <div class="field full"><label for="message">How can we help? *</label><textarea id="message" name="message" required maxlength="2000" placeholder="Tell us about your business, your target customers and what you'd like to achieve." aria-describedby="message-err"></textarea><span class="err" id="message-err" role="alert"></span></div>
           <div class="field full"><div class="data-notice" id="data-notice"><strong>How we use your details.</strong> We use the details in this form only to reply to your enquiry and discuss the service you ask about. They reach us by email; nothing is stored on this website. You can withdraw your consent or ask us to delete your details at any time by emailing <a href="mailto:{EMAIL}?subject=Privacy%20request">{EMAIL}</a>. Read the full <a href="privacy.html">Privacy Notice</a>.</div></div>
           <div class="field full"><label class="consent" for="consent"><input id="consent" name="consent" type="checkbox" aria-describedby="data-notice consent-err"><span>I have read the notice above and consent to SalesTrack using my details to respond to this enquiry. *</span></label><span class="err" id="consent-err" role="alert"></span></div>
           <div class="field full"><label class="consent" for="marketing"><input id="marketing" name="marketing" type="checkbox"><span>Optional: I'd also like occasional updates about SalesTrack services. I can unsubscribe at any time.</span></label></div>
@@ -499,7 +499,7 @@ def privacy():
       <table>
         <thead><tr><th scope="col">Personal data</th><th scope="col">Why we use it</th><th scope="col">Basis</th><th scope="col">How long we keep it</th></tr></thead>
         <tbody>
-          <tr><td>Enquiry form or email: name, email address, service of interest, message; optionally phone number and company name</td><td>To reply to your enquiry, discuss the service you asked about and prepare a proposal</td><td>Your consent, given by ticking the consent box or by emailing us</td><td>Until your enquiry is resolved; longer only if you become a client or the law requires it</td></tr>
+          <tr><td>Enquiry form or email: name, email address, phone number, company name, service of interest and message</td><td>To reply to your enquiry, discuss the service you asked about and prepare a proposal</td><td>Your consent, given by ticking the consent box or by emailing us</td><td>Until your enquiry is resolved; longer only if you become a client or the law requires it</td></tr>
           <tr><td>Your choice about marketing updates</td><td>To send occasional updates about our services, only if you opted in</td><td>Your separate, optional consent</td><td>Until you unsubscribe or withdraw consent</td></tr>
           <tr><td>A record of your consent (the consent text and the date and time, included in your enquiry email)</td><td>To show that you gave consent, as the DPDP Act requires</td><td>Legal obligation</td><td>For as long as we hold the enquiry it relates to</td></tr>
         </tbody>

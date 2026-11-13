@@ -12,7 +12,7 @@ This is a technical review, not legal advice. It does not certify compliance. Th
 
 | Point | Personal data | Where it goes | Stored on website? |
 |---|---|---|---|
-| Contact form (contact.html) | Name, email, service of interest, message; optionally phone and company; marketing choice; consent record | Opens the visitor's own email app; sent to info@salestrack.co.in (GoDaddy email) | No |
+| Contact form (contact.html) | Name, email, phone, company, service of interest, message (all required); optional marketing choice; consent record | Opens the visitor's own email app; sent to info@salestrack.co.in (GoDaddy email) | No |
 | Email links (all pages) | Whatever the visitor writes | info@salestrack.co.in (GoDaddy email) | No |
 | Website hosting | IP address and basic connection data | GitHub Pages server logs, under GitHub's terms | No (held by GitHub) |
 | Cookies, analytics, trackers, browser storage | None | n/a | n/a |
@@ -67,9 +67,14 @@ These can't be fixed in code. They depend on how SalesTrack works day to day.
 6. Cross-border transfer: confirm no provider stores data in a country restricted under s.16.
 7. Whether the consent-record approach (consent text and timestamp in the email) is sufficient evidence under s.6(10).
 8. How the DPDP Act applies to SalesTrack's core work: lead generation, calling and live transfers to third-party data principals. This is the largest compliance area, and it is outside the website.
-9. The wording of the Privacy Notice as a whole, and its interaction with UK GDPR and EU GDPR for overseas clients.
+9. Data minimisation (s.6(1), s.8): phone and company became **required** on 13 November 2026 at the owner's request. Confirm that both are needed to handle an enquiry.
+10. The wording of the Privacy Notice as a whole, and its interaction with UK GDPR and EU GDPR for overseas clients.
 
 ## Sources
 
 - [DPDP Rules, 2025: key highlights (SCC Online, 26 Dec 2025)](https://www.scconline.com/blog/post/2025/12/26/digital-personal-data-protection-rules-2025-key-highlights/)
 - [PIB explainer on the DPDP Rules, 2025 (Nov 2025)](https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf)
+
+## Change log
+
+- **13 Nov 2026:** All enquiry fields made required, except the optional marketing box, which must stay optional. Validation added: names letters and spaces only; strict email format; phone 10–15 digits with optional +; company letters, numbers and basic punctuation; website links blocked in every field. The Privacy Notice table was updated to match.
